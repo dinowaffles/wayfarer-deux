@@ -23,7 +23,7 @@ export class HomepageComponent implements OnInit {
   title: string|null = '';
   posts: any;
 
-  isShown: boolean = false; 
+  isShown: boolean = false;
 
   author: string = '';
   date: string = '';
@@ -34,9 +34,9 @@ export class HomepageComponent implements OnInit {
   userPosts = [
     {
       // usertitle: 'test',
-      // userdate: 'test', 
-      // userauthor: 'test', 
-      // usertext: 'test', 
+      // userdate: 'test',
+      // userauthor: 'test',
+      // usertext: 'test',
     },
   ]
 
@@ -64,7 +64,7 @@ export class HomepageComponent implements OnInit {
         let paramId: string = params.get('id') || '';
         return posts.id === parseInt(paramId);
       });
-      
+
     });
 
     this.route.queryParams.subscribe(params => {
@@ -82,11 +82,16 @@ export class HomepageComponent implements OnInit {
     // })
 
 
-      
-
   }
-    
-  
+  findWeather(city: string): void {
+    this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city.name}&appid=8935027cdf20f978dce1257d340e6d10&units=imperial`)
+    .subscribe((response) => {
+      console.log(response);
+      this.weather = response;
+          });
+    }
+
+
   toggleShow() {
     this.isShown = ! this.isShown;
   }
