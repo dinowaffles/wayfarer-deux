@@ -74,7 +74,7 @@ export class HomepageComponent implements OnInit {
     this.city.posts = this.city.posts.sort((a:any, b:any) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     // this.locationSubject.subscribe(name => {
-      this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city.name}&appid=8935027cdf20f978dce1257d340e6d10&units=imperial`)
+      this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city.name}&appid=8935027cdf20f978dce1257d340e6d10&units=imperial`)
       .subscribe((response) => {
         console.log(response);
         this.weather = response;
@@ -84,7 +84,7 @@ export class HomepageComponent implements OnInit {
 
   }
   findWeather(city: string): void {
-    this.http.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city.name}&appid=8935027cdf20f978dce1257d340e6d10&units=imperial`)
+    this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city.name}&appid=8935027cdf20f978dce1257d340e6d10&units=imperial`)
     .subscribe((response) => {
       console.log(response);
       this.weather = response;
