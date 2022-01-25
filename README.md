@@ -7,6 +7,7 @@ This project was originally started in [THIS REPOSITORY](https://github.com/dino
 A travel community for users to share city-specific tips about their favorite locations around the world.
 
 ## Deployed Site
+Check it out [HERE](https://wayfarer-abby-avantika.herokuapp.com/) !!
 
 ## Planning
 
