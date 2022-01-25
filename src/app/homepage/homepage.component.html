@@ -1,0 +1,134 @@
+<div class="whole-page">
+    <div class="sidebar">
+        <div *ngFor="let city of cities; index as i">
+           <a  type = "button" class="sidebar-link"  routerLink="/cities/{{city.id}}">{{city.name}}
+           </a><br>
+  
+          </div>
+        </div>
+  
+  
+      <div class="city-detail">
+              <span class="city-header" >
+                  <span class="city-name" >{{city.name | uppercase}}</span>
+                  <img src={{city.photo}} >
+              </span>
+  
+              <div class="posts-container">
+                  <div class="posts" *ngFor="let post of city.posts; index as i">
+                      <p class="post-title">{{city.posts[i].title}}</p>
+                      <p class="post-date">{{city.posts[i].date}}</p>
+  
+  
+                      <button class="posts-btn" (click)="toggleShow()" type="checkbox" >Show More</button>
+                      <div *ngIf="isShown" class="post-info"  id="divshow" >
+                          <p class="post-author">{{city.posts[i].author}}</p>
+                          <p class="post-text">{{city.posts[i].text}}</p>
+                      </div>
+              </div>
+  
+              <div class="user-posts" *ngFor="let post of userPosts; index as i">
+                  <p class="user-post-title">{{this.title}}</p>
+                  <p class="user-post-date">{{this.date}}</p>
+  
+  
+                  <button class="posts-btn" (click)="toggleShow()" type="checkbox" >Show More</button>
+                  <div *ngIf="isShown" class="user-post-info"  id="divshow" >
+                      <p class="user-post-author">{{this.author}}</p>
+                      <p class="user-post-text">{{this.text}}</p>
+                  </div>
+          </div>
+  
+          
+          </div>
+  
+      </div>
+  
+      <div class="weather-container">
+          <div class="weather-header">Today's Weather </div>
+          <div>It is currently: {{weather.weather[0].description}}</div>
+          <div>High temp: {{weather.main.temp_max}}° F</div>
+          <div>Low temp: {{weather.main.temp_min}}° F</div>
+      </div>
+  
+      <div class="user-post">
+          <p class="user-post-header">Do you want to make a post?</p>
+          <!-- <form [formGroup]="userPost">
+              <label for="username">Enter your username:
+                  <input type="text" id="author" name="author" [(ngModel)]="author" placeholder="User Name"><br>
+              </label>
+  
+              <label for="date">Enter today's date:
+                  <input type="text" id="date" name="date" [(ngModel)]="date" placeholder="Date"><br>
+              </label>
+              
+              <label for="postitle">Enter a title for your post: 
+                  <span class="text-danger" *ngIf="userPost.get('postTitle')?.errors && userPost.get('postTitle')?.hasError('required')">*</span>
+  
+                  <input type="text" id="posttitle" name="posttitle" 
+                      [(ngModel)]="posttitle" maxlength="200" minlength="1" 
+                      formControlName="posttitle" class="form-control" 
+                      [class.valid]="userPost.get('postTitle')?.valid && 
+                      (userPost.get('postTitle')?.dirty || userPost.get('postTitle')?.touched)"
+                      [class.invalid]="userPost.get('toDo')?.invalid && 
+                      (userPost.get('postTitle')?.dirty || userPost.get('postTitle')?.touched)"
+                      placeholder="Title"><br>
+  
+                      <div *ngIf="userPost.get('postTitle')?.invalid && userPost.get('postTitle')?.errors && 
+                              (userPost.get('postTitle')?.dirty || userPost.get('postTitle')?.touched)">
+                          <small class="text-danger"
+                              *ngIf="userPost.get('postTitle')?.hasError('required')">
+                              This field is required.
+                          </small>
+                          <small class="text-danger"
+                              *ngIf="userPost.get('postTitle')?.hasError('minlength')">
+                              The minimum length for this field is 1 characters.
+                          </small>
+                          <small class="text-danger"
+                              *ngIf="userPost.get('postTitle')?.hasError('maxlength')">
+                              The maximum length for this field is 200 characters.
+                          </small>
+                      </div>
+  
+                      <div *ngIf="userPost.get('postTitle')?.hasError('maxlength')">Title must be less than 200 characters.</div>
+                      <div *ngIf="userPost.get('postTitle')?.hasError('minlength')">Title must be longer than 1 character.</div>
+              </label>
+              
+              <label for="text">What do you have to share?
+                  <span class="text-danger" *ngIf="userPost.get('postText')?.errors && userPost.get('postTest')?.hasError('required')">*</span>
+  
+                  <textarea type="text" id="date" name="posttext" 
+                  class="form-control" formControlName="postext" 
+                  [class.valid]="userPost.get('postTest')?.valid && 
+                  (userPost.get('postTest')?.dirty || userPost.get('postTest')?.touched)"
+                  [class.invalid]="userPost.get('toDo')?.invalid && 
+                  (userPost.get('postTest')?.dirty || userPost.get('postTest')?.touched)"
+                  [(ngModel)]="posttext" placeholder="Post Content"></textarea><br>
+  
+                  <div *ngIf="userPost.get('postText')?.invalid && userPost.get('postText')?.errors && 
+                  (userPost.get('postText')?.dirty || userPost.get('postText')?.touched)">
+                       <small class="text-danger"
+                          *ngIf="userPost.get('postText')?.hasError('required')">
+                          This field is required.
+                      </small>
+                  </div>
+                  
+                  <div *ngIf="userPost.get('postText')?.hasError('required')">Post content is required.</div>
+              </label><br>
+  
+  
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="postSubmit()" [disabled]="userPost.invalid"><span class="glyphicon glyphicon-submit">Submit</span></button>
+          </form> -->
+  
+          <input type="text" id="author" name="author" [(ngModel)]="author" placeholder="User Name"><br>
+          <input type="text" id="date" name="date" [(ngModel)]="date" placeholder="Date"><br>
+     
+          <input type="text" id="title" name="title" [(ngModel)]="title" placeholder="Title"><br>
+          <textarea type="text" id="text" name="text" [(ngModel)]="text" placeholder="Post Content"></textarea><br>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="postSubmit()"><span class="glyphicon glyphicon-submit">Submit</span></button>
+      
+  
+      </div>
+  </div>
+  
+  
